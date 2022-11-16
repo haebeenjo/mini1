@@ -25,17 +25,16 @@
 
         body {
             margin: 0px;
-            background-color: #eee;
+            background-color: lavender;
         }
 
-        .mypic {
+        .mypic2 {
             width: 100%;
             height: 200px;
 
             background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../static/q.PNG);
             background-size: cover;
-
-            background-position: center 65%;
+            background-position: center 70%;
 
             display: flex;
             flex-direction: row;
@@ -51,7 +50,6 @@
 
             background-color: #ffffff;
 
-            border: 1px solid black;
         }
 
         .aboutme {
@@ -67,7 +65,6 @@
 
             margin: 0px 180px;
 
-            border: 1px solid black;
         }
 
         .mypic {
@@ -98,7 +95,7 @@
             background-color: #ffffff;
             background-color: rgba(255, 255, 255, 0.5);
 
-            border: 1px solid black;
+            border: 1px solid gray;
         }
 
         .comment {
@@ -124,6 +121,10 @@
 
         .card {
             margin: 5px 0px;
+        }
+
+        .mybtn {
+            border-color: transparent;
         }
 
         </style>
@@ -186,22 +187,23 @@
 
 </body>
 </html>
-    <div class="mypic">
+    <div class="mypic2">
     </div>
 <div class="mytitle">
     <h1>Introduction</h1>
 </div>
 <div class="aboutme">
-    <img src="https://blog.kakaocdn.net/dn/cO3Tfw/btrRichw9k9/kVb8XwtOGvfRTiUzJqxlZ1/img.png"
+    <img src="../static/123.png"
          class="mypic" width="250" alt="이미지"/>
     <div class="myinfo">
         <h4><strong>&nbsp;&nbsp;&nbsp;I am...</strong></h4>
         <ul>
-            <li>이름:</li>
-            <li>MBTI:</li>
-            <li>나의 장점:</li>
-            <li>협업을 하는 과정에서의 나의 스타일:</li>
-            <li>블로그 주소:</li>
+            <li>이름: 조해빈</li>
+            <li>MBTI: ISFP</li>
+            <li>나의 장점: 솔직하다</li>
+            <li>협업을 하는 과정에서의 나의 스타일: 협력하는 자세로 모든 의견을 경청하며, 적극적인 자세로 임한다</li>
+            <li>SNS</li>
+            <button type="button" class="mybtn"> <a href="https://blog.naver.com/haebin1622"> <img src="../static/블로그1.png" alt="..."></a></button>
         </ul>
     </div>
 </div>
@@ -210,15 +212,14 @@
     <div class="comment">
         <div class="form-floating mb-3">
             <input type="text" class="form-control" id="name" placeholder="url">
-            <label for="floatingInput">이름</label>
+            <label for="name">이름</label>
         </div>
         <div class="form-floating">
             <textarea class="form-control" placeholder="Leave a comment here" id="comment"
                       style="height: 100px"></textarea>
-            <label for="floatingTextarea2">방명록을 남겨주세요</label>
+            <label for="comment">방명록을 남겨주세요</label>
         </div>
-        <button onclick="save_comment()" button type="button" class="btn btn-light" data-bs-toggle="button"
-                style="background-color: lightpink">방명록 남기기
+        <button onclick="save_comment()" button type="button" class="btn btn-light" style="background-color: mediumpurple">방명록 남기기
         </button>
     </div>
 
