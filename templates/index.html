@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+            crossorigin="anonymous"></script>
+
+
+    <title>소개 페이지</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@200;300;400;500;600;700;900&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Gowun Batang', serif;
+        }
+
+        body {
+            margin: 0px;
+            background-color: #eee;
+        }
+
+        .mypic {
+            width: 100%;
+            height: 200px;
+
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../static/q.PNG);
+            background-size: cover;
+
+            background-position: center 65%;
+
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .mytitle {
+            padding-top: 50px;
+            padding-left: 40px;
+
+            margin: 0px 180px;
+
+            background-color: #ffffff;
+
+            border: 1px solid black;
+        }
+
+        .aboutme {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: center;
+
+            background-color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.5);
+
+            padding: 40px;
+
+            margin: 0px 180px;
+
+            border: 1px solid black;
+        }
+
+        .mypic {
+            border: 5px double #646464;
+        }
+
+        .myinfo {
+            font-size: 18px;
+
+            border: 5px double #646464;
+
+            padding: 30px 30px 20px;
+            margin-left: 50px;
+
+            width: 550px;
+        }
+
+        .wrap {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: center;
+
+
+            margin: 0px 180px;
+            height: 300px;
+
+            background-color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.5);
+
+            border: 1px solid black;
+        }
+
+        .comment {
+            width: 350px;
+            margin: 10px 15px;
+        }
+
+        .comment > button {
+            margin-top: 15px;
+            width: 350px;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .mycards {
+            overflow-y: scroll;
+            margin: 5px 15px;
+
+            width: 450px;
+            height: 250px;
+            padding-right: 15px;
+        }
+
+        .card {
+            margin: 5px 0px;
+        }
+
+        </style>
+    <script>
+        $(document).ready(function () {
+            show_comment()
+        });
+
+        function save_comment() {
+            let name = $('#name').val()
+            let comment = $('#comment').val()
+            if (name == "") {
+                alert("이름을 입력해주세요.");
+                return false
+            } else if (comment == "") {
+                alert("내용을 입력해주세요.");
+                return false
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '/teamintro',
+                data: {name_give: name, comment_give: comment},
+                success: function (response) {
+                    alert(response['msg'])
+
+                    window.location.reload()
+                }
+            })
+        }
+
+        function show_comment() {
+            $.ajax({
+                type: "GET",
+                url: "/teamintro",
+                data: {},
+                success: function (response) {
+                    let rows = response['comments']
+                    for (let i = 0; i < rows.length; i++) {
+                        let name = rows[i]['name']
+                        let comment = rows[i]['comment']
+
+                        let temp_html = `<div class="card">
+                                            <div class="card-body">
+                                                <blockquote class="blockquote mb-0" style="font-size: 18px">
+                                                    <p>${comment}</p>
+                                                    <footer class="blockquote-footer">${name}</footer>
+                                                </blockquote>
+                                            </div>
+                                        </div>`
+                        $('#comment-list').append(temp_html)
+                    }
+                }
+            });
+        }
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>
+    <div class="mypic">
+    </div>
+<div class="mytitle">
+    <h1>Introduction</h1>
+</div>
+<div class="aboutme">
+    <img src="https://blog.kakaocdn.net/dn/cO3Tfw/btrRichw9k9/kVb8XwtOGvfRTiUzJqxlZ1/img.png"
+         class="mypic" width="250" alt="이미지"/>
+    <div class="myinfo">
+        <h4><strong>&nbsp;&nbsp;&nbsp;I am...</strong></h4>
+        <ul>
+            <li>이름:</li>
+            <li>MBTI:</li>
+            <li>나의 장점:</li>
+            <li>협업을 하는 과정에서의 나의 스타일:</li>
+            <li>블로그 주소:</li>
+        </ul>
+    </div>
+</div>
+
+<div class="wrap">
+    <div class="comment">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="name" placeholder="url">
+            <label for="floatingInput">이름</label>
+        </div>
+        <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="comment"
+                      style="height: 100px"></textarea>
+            <label for="floatingTextarea2">방명록을 남겨주세요</label>
+        </div>
+        <button onclick="save_comment()" button type="button" class="btn btn-light" data-bs-toggle="button"
+                style="background-color: lightpink">방명록 남기기
+        </button>
+    </div>
+
+
+    <div class="mycards" id="comment-list">
+
+    </div>
+
+</div>
