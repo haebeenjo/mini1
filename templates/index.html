@@ -30,26 +30,19 @@
 
         .mypic2 {
             width: 100%;
-            height: 200px;
+            height: 300px;
 
             background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../static/q.PNG);
-            background-size: cover;
-            background-position: center 70%;
+            background-size: initial;
+            background-position: center 66%;
+
+            color: white;
+            padding-top: 3%;
 
             display: flex;
             flex-direction: row;
             align-items: flex-start;
             justify-content: center;
-        }
-
-        .mytitle {
-            padding-top: 50px;
-            padding-left: 40px;
-
-            margin: 0px 180px;
-
-            background-color: #ffffff;
-
         }
 
         .aboutme {
@@ -65,16 +58,19 @@
 
             margin: 0px 180px;
 
+            flex-wrap: wrap;
+
         }
 
         .mypic {
-            border: 5px double #646464;
+            border: 2px solid #646464;
+            border-radius: 6px;
+
+            margin-top: 1%;
         }
 
         .myinfo {
             font-size: 18px;
-
-            border: 5px double #646464;
 
             padding: 30px 30px 20px;
             margin-left: 50px;
@@ -127,6 +123,13 @@
             border-color: transparent;
         }
 
+        .myself {
+            background-color: antiquewhite;
+            padding: 5%;
+
+            margin: 0px 180px;
+        }
+
         </style>
     <script>
         $(document).ready(function () {
@@ -146,7 +149,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/teamintro',
+                url: '/first_mini',
                 data: {name_give: name, comment_give: comment},
                 success: function (response) {
                     alert(response['msg'])
@@ -159,10 +162,10 @@
         function show_comment() {
             $.ajax({
                 type: "GET",
-                url: "/teamintro",
+                url: "/first_mini",
                 data: {},
                 success: function (response) {
-                    let rows = response['comments']
+                    let rows = response['first_mini']
                     for (let i = 0; i < rows.length; i++) {
                         let name = rows[i]['name']
                         let comment = rows[i]['comment']
@@ -188,44 +191,43 @@
 </body>
 </html>
     <div class="mypic2">
+        <h1>Introduction</h1>
     </div>
-<div class="mytitle">
-    <h1>Introduction</h1>
-</div>
-<div class="aboutme">
-    <img src="../static/123.png"
-         class="mypic" width="250" alt="이미지"/>
-    <div class="myinfo">
-        <h4><strong>&nbsp;&nbsp;&nbsp;I am...</strong></h4>
-        <ul>
-            <li>이름: 조해빈</li>
-            <li>MBTI: ISFP</li>
-            <li>나의 장점: 솔직하다</li>
-            <li>협업을 하는 과정에서의 나의 스타일: 협력하는 자세로 모든 의견을 경청하며, 적극적인 자세로 임한다</li>
-            <li>SNS</li>
-            <button type="button" class="mybtn"> <a href="https://blog.naver.com/haebin1622"> <img src="../static/블로그1.png" alt="..."></a></button>
-        </ul>
-    </div>
-</div>
-
-<div class="wrap">
-    <div class="comment">
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="name" placeholder="url">
-            <label for="name">이름</label>
+    <div class="aboutme">
+        <img src="../static/123.png"
+             class="mypic" width="250" alt="이미지"/>
+        <div class="myinfo">
+            <h4><strong>&nbsp;&nbsp;I am...</strong></h4>
+            <ul>
+                <li>이름: 조해빈</li>
+                <li>MBTI: ISFP</li>
+                <li>나의 장점: 솔직하다</li>
+                <li>협업을 하는 과정에서의 나의 스타일: 협력하는 자세로 모든 의견을 경청하며, 적극적인 자세로 임한다</li>
+                <li>SNS</li>
+                <button type="button" class="mybtn"> <a href="https://blog.naver.com/haebin1622"> <img src="../static/블로그1.png" alt="..."></a></button>
+                <button type="button" class="mybtn"> <a href="https://velog.io/@haebeen?tag=%EC%8A%A4%ED%8C%8C%EB%A5%B4%ED%83%80%EC%BD%94%EB%94%A9%ED%81%B4%EB%9F%BD"> <img src="../static/velog.png" alt="..."></a></button>
+            </ul>
         </div>
-        <div class="form-floating">
-            <textarea class="form-control" placeholder="Leave a comment here" id="comment"
-                      style="height: 100px"></textarea>
-            <label for="comment">방명록을 남겨주세요</label>
+    </div>
+    <div class="wrap">
+        <div class="comment">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="name" placeholder="url">
+                <label for="name">이름</label>
+            </div>
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Leave a comment here" id="comment"
+                          style="height: 100px"></textarea>
+                <label for="comment">방명록을 남겨주세요</label>
+            </div>
+            <button onclick="save_comment()" button type="button" class="btn btn-light"
+                    style="background-color: mediumpurple">방명록 남기기
+            </button>
         </div>
-        <button onclick="save_comment()" button type="button" class="btn btn-light" style="background-color: mediumpurple">방명록 남기기
-        </button>
+
+
+        <div class="mycards" id="comment-list">
+
+        </div>
+
     </div>
-
-
-    <div class="mycards" id="comment-list">
-
-    </div>
-
-</div>
